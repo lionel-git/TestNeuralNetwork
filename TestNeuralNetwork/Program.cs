@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using NeuralNetwork;
 
 namespace TestNeuralNetwork
 {
@@ -6,7 +8,8 @@ namespace TestNeuralNetwork
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var layerSizes = new List<int>() { 10, 5, 5 };
+            var cnn = new CNN(layerSizes);
         }
     }
 }
