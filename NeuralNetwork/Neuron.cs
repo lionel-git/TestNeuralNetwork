@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace NeuralNetwork
 {
@@ -11,7 +9,33 @@ namespace NeuralNetwork
 
         private double bias_;
 
-        private static RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
+        // Current value of the neuron
+        private double value_;
+        public double Value
+        {
+            get { return value_; }
+            set
+            {
+                if (weights_.Count > 0)
+                    throw new ArgumentException($"Set value not on an input Neuron");
+                value_ = value;
+            }
+        }
+
+        private static Random random = null;
+
+        public static void InitRandom(int seed)
+        {
+            if (random == null)
+                random = new Random(seed);
+            else
+                throw new Exception($"Random seed already initialised");
+        }
+
+        public static void FreeRandom()
+        {
+            random = null;
+        }
 
         public Neuron(int size, bool randomize)
         {
@@ -24,13 +48,21 @@ namespace NeuralNetwork
             }
         }
 
-        private double GetRandomDouble(double min = -10.0, double max = +10.0)
+        private double GetRandomDouble(double min = -1.0, double max = +1.0)
         {
-            var bytes = new Byte[8];
-            random.GetBytes(bytes);
-            var ul = BitConverter.ToUInt64(bytes, 0) / (1 << 11);
-            var value = ul / (Double)(1UL << 53); // Should be in [0,1[
-            return min + (max - min) * value;
+            return min + (max - min) * random.NextDouble();
+        }
+
+        public void Evaluate(Layer previousLayer)
+        {
+            if (weights_.Count != previousLayer.Count)
+                throw new ArgumentException($"Weight size do not match: {weights_.Count} {previousLayer.Count}");
+            // calculate W.X + B
+            double sum = bias_;
+            for (int i = 0; i < weights_.Count; i++)
+                sum += weights_[i] * previousLayer.NeuronValue(i);
+            // Non linear function
+            value_ = Helpers.Sigmoid(sum);
         }
     }
 }
