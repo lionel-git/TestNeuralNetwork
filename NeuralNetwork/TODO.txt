@@ -6,3 +6,8 @@ Créér networkRef avec seed1
 Créér networkTest avec seed2 ou 0
 
 Calibrer networkTest sur output networkRef pour tester algo gradient etc..
+
+Implementer descente gradient
+
+Loader MNIST
+http://yann.lecun.com/exdb/mnist/

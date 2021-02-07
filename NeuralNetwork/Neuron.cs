@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common;
 
 namespace NeuralNetwork
 {
@@ -57,7 +58,7 @@ namespace NeuralNetwork
         {
             if (Weights.Count != previousLayer.Count)
                 throw new ArgumentException($"Weight size do not match: {Weights.Count} {previousLayer.Count}");
-            // calculate W.X + B
+            // calculate B + W.X
             double sum = Bias;
             for (int i = 0; i < Weights.Count; i++)
                 sum += Weights[i] * previousLayer.NeuronValue(i);

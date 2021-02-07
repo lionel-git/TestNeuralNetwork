@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestNeuralNetwork", "TestNe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetwork", "NeuralNetwork\NeuralNetwork.csproj", "{C055C973-9F3A-4F07-A5A1-EFCC83A6A850}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MNIST", "MNIST\MNIST.csproj", "{D5CAC0B0-19B5-4093-A9BD-8323409FFEFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{ADAB6A7C-522D-4EC0-B09B-EB4481ECAC4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{C055C973-9F3A-4F07-A5A1-EFCC83A6A850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C055C973-9F3A-4F07-A5A1-EFCC83A6A850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C055C973-9F3A-4F07-A5A1-EFCC83A6A850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CAC0B0-19B5-4093-A9BD-8323409FFEFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CAC0B0-19B5-4093-A9BD-8323409FFEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CAC0B0-19B5-4093-A9BD-8323409FFEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CAC0B0-19B5-4093-A9BD-8323409FFEFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADAB6A7C-522D-4EC0-B09B-EB4481ECAC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADAB6A7C-522D-4EC0-B09B-EB4481ECAC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADAB6A7C-522D-4EC0-B09B-EB4481ECAC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADAB6A7C-522D-4EC0-B09B-EB4481ECAC4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

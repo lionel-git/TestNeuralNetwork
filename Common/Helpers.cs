@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Text;
 
-namespace NeuralNetwork
+namespace Common
 {
     public static class Helpers
     {
@@ -33,6 +35,22 @@ namespace NeuralNetwork
             for (int i = 0; i < list.Count; i++)
                 Console.Write($" {list[i]}");
             Console.WriteLine();
+        }
+
+        public static byte[] Decompress(string path)
+        {
+            var fileToDecompress = new FileInfo(path);
+            using (var originalFileStream = fileToDecompress.OpenRead())
+            {
+                using (var decompressedFileStream = new MemoryStream())
+                {
+                    using (var decompressionStream = new GZipStream(originalFileStream, CompressionMode.Decompress))
+                    {
+                        decompressionStream.CopyTo(decompressedFileStream);
+                        return decompressedFileStream.ToArray();
+                    }
+                }
+            }
         }
     }
 }
