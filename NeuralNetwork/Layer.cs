@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,40 +7,46 @@ namespace NeuralNetwork
 {
     public class Layer
     {
-        private List<Neuron> neurons_;
+        public List<Neuron> Neurons { get; set; }
 
-        public int Count => neurons_.Count;
+        [JsonIgnore]
+        public int Count => Neurons.Count;
+
+        public Layer()
+        {
+            Neurons = new List<Neuron>();
+        }
 
         public Layer(int size, int sizeWeights)
         {
-            neurons_ = new List<Neuron>(size);
+            Neurons = new List<Neuron>(size);
             for (int i = 0; i < size; i++)
-                neurons_.Add(new Neuron(sizeWeights, true));
+                Neurons.Add(new Neuron(sizeWeights, true));
         }
         public void SetValues(IList<double> values)
         {
-            if (neurons_.Count != values.Count)
-                throw new ArgumentException($"Invalid vector sizes: layerSize={neurons_.Count} inputSize={values.Count}");
-            for (int i = 0; i < neurons_.Count; i++)
-                neurons_[i].Value = values[i];
+            if (Neurons.Count != values.Count)
+                throw new ArgumentException($"Invalid vector sizes: layerSize={Neurons.Count} inputSize={values.Count}");
+            for (int i = 0; i < Neurons.Count; i++)
+                Neurons[i].Value = values[i];
         }
 
         public void Evaluate(Layer previousLayer)
         {
-            for (int i = 0; i < neurons_.Count; i++)
-                neurons_[i].Evaluate(previousLayer);
+            for (int i = 0; i < Neurons.Count; i++)
+                Neurons[i].Evaluate(previousLayer);
         }
 
         public double NeuronValue(int i)
         {
-            return neurons_[i].Value;
+            return Neurons[i].Value;
         }
 
         public List<double> GetValues()
         {
-            var values = new List<double>(neurons_.Count);
-            for (int i = 0; i < neurons_.Count; i++)
-                values.Add(neurons_[i].Value);
+            var values = new List<double>(Neurons.Count);
+            for (int i = 0; i < Neurons.Count; i++)
+                values.Add(Neurons[i].Value);
             return values;
         }
     }
