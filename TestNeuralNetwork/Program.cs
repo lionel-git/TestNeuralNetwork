@@ -63,11 +63,17 @@ namespace TestNeuralNetwork
             var mnsitReaderTest = new MnistReader();
             mnsitReaderTest.LoadImagesAndLabels(@"g:\MNIST\t10k-images-idx3-ubyte.gz", @"g:\MNIST\t10k-labels-idx1-ubyte.gz");
             Console.WriteLine($"Loaded: {mnsitReaderTest.ImagesLabels.Count}");
-
-            var mnsitReaderTrain = new MnistReader();
-            mnsitReaderTrain.LoadImagesAndLabels(@"g:\MNIST\train-images-idx3-ubyte.gz", @"g:\MNIST\train-labels-idx1-ubyte.gz");
-            Console.WriteLine($"Loaded: {mnsitReaderTrain.ImagesLabels.Count}");
-
+            int idx = 25;
+            Console.WriteLine($"======= LABEL: {mnsitReaderTest.ImagesLabels[idx].Label} ================================");
+            Console.WriteLine(mnsitReaderTest.ImagesLabels[idx].GetImageString());
+            Console.WriteLine("=================================================");
+           
+            if (false)
+            {
+                var mnsitReaderTrain = new MnistReader();
+                mnsitReaderTrain.LoadImagesAndLabels(@"g:\MNIST\train-images-idx3-ubyte.gz", @"g:\MNIST\train-labels-idx1-ubyte.gz");
+                Console.WriteLine($"Loaded: {mnsitReaderTrain.ImagesLabels.Count}");
+            }
         }
 
         static void Main(string[] args)

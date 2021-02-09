@@ -36,7 +36,7 @@ namespace MNIST
         {
             var values = new double[count];
             for (int i = 0; i < count; i++)
-                values[i] = (double)data[offset + i]/255.0;
+                values[i] = data[offset + i]/255.0;
             offset += (int)count;
             return values;
         }
@@ -76,7 +76,11 @@ namespace MNIST
                 throw new Exception($"Labels and images do not match");
 
             for (int i = 0; i < nbItems; i++)
+            {
+                ImagesLabels[i].Rows = (int)nbRows;
+                ImagesLabels[i].Columns = (int)nbCols;
                 ImagesLabels[i].Pixels = ReadImageValues(data, nbRows * nbCols, ref offset);
+            }
 
             if (offset!=data.Length)
                 throw new Exception($"Error reading all datas");
@@ -89,6 +93,6 @@ namespace MNIST
 
             var dataImages = Helpers.Decompress(pathImages);
             ProcessImages(dataImages);
-        }
+        }      
     }
 }
