@@ -6,11 +6,13 @@ namespace NeuralNetwork
 {
     public class Neuron
     {
+        // Weigth(n) = bias, Current weights, updated on backward
         public List<double> Weights { get; set; }
-
-        public double Bias { get; set; }
-
-        public double Value { get; set; }
+       
+        // Current "values", updated on forward
+        public double Value { get; set; }       
+        public List<double> WeightsDerivative { get; set; }        
+        
 
         private static Random random = null;
 
@@ -30,22 +32,28 @@ namespace NeuralNetwork
         public Neuron()
         {
             Weights = new List<double>();
+            WeightsDerivative = new List<double>();
         }
 
         public Neuron(int size, bool randomize)
         {
-            Weights = new List<double>(size);
+            Weights = new List<double>(size + 1);
+            WeightsDerivative = new List<double>(size + 1);
             if (randomize)
             {
-                for (int i = 0; i < size; i++)
+                for (int i = 0; i <= size; i++)
+                {
                     Weights.Add(GetRandomDouble());
-                Bias = GetRandomDouble();
+                    WeightsDerivative.Add(0.0);
+                }
             }
             else
             {
-                for (int i = 0; i < size; i++)
+                for (int i = 0; i <= size; i++)
+                {
                     Weights.Add(0.0);
-                Bias = 0.0;
+                    WeightsDerivative.Add(0.0);
+                }
             }
         }
 
@@ -56,14 +64,21 @@ namespace NeuralNetwork
 
         public void Evaluate(Layer previousLayer)
         {
-            if (Weights.Count != previousLayer.Count)
+            if (Weights.Count != previousLayer.Count + 1)
                 throw new ArgumentException($"Weight size do not match: {Weights.Count} {previousLayer.Count}");
             // calculate B + W.X
-            double sum = Bias;
-            for (int i = 0; i < Weights.Count; i++)
+            double sum = Weights[previousLayer.Count];
+            for (int i = 0; i < previousLayer.Count; i++)
                 sum += Weights[i] * previousLayer.NeuronValue(i);
-            // Non linear function
-            Value = Helpers.Sigmoid(sum);
+            
+            // Non linear function            
+            Helpers.Sigmoid(sum, out double value, out double SumDerivative);
+
+            // Derive de Value par rapport au weights et bias
+            Value = value;
+            WeightsDerivative[previousLayer.Count] = SumDerivative;
+            for (int i = 0; i < previousLayer.Count; i++)
+                WeightsDerivative[i] = SumDerivative * previousLayer.NeuronValue(i);
         }
     }
 }

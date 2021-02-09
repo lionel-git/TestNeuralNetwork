@@ -8,19 +8,24 @@ namespace Common
 {
     public static class Helpers
     {
-        public static double Sigmoid(double x)
+        public static void Sigmoid(double x, out double y, out double yp)
         {
-            return 1.0 / (1.0 + Math.Exp(-x));
+            y = 1.0 / (1.0 + Math.Exp(-x));
+            yp = y * (1.0 - y);
         }
 
-        public static double SigmoidDerivedFromValue(double y)
+        public static void ReLu(double x, out double y, out double yp)
         {
-            return y * (1.0 - y);
-        }
-
-        public static double ReLu(double x)
-        {
-            return x > 0 ? x : 0.0;
+            if (x > 0.0)
+            {
+                y = x;
+                yp = 1.0;
+            }
+            else
+            {
+                y = 0.0;
+                yp = 0.0;
+            }
         }
 
         public static double ReLuDerivedFromValue(double y)

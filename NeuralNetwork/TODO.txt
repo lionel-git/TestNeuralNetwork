@@ -13,3 +13,5 @@ Loader MNIST
 http://yann.lecun.com/exdb/mnist/
 
 Display image + Label pour check
+
+Mettre bias comme weigth(N)
