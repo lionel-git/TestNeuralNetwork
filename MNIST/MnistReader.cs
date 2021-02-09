@@ -17,12 +17,6 @@ namespace MNIST
         {
         }
 
-        public byte[] LoadSample(string path)
-        {
-            var data = Helpers.Decompress(path);
-            return data;
-        }
-
         private static uint ReadUint32(byte[] data, ref int offset)
         {
             uint v = 0;

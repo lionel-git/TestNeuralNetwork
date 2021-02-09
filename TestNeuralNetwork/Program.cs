@@ -43,21 +43,6 @@ namespace TestNeuralNetwork
             Helpers.DisplayList("Test", outputsTest);
         }
 
-        static void TestMnist()
-        {
-            var mnsitReader = new MnistReader();
-            var data = mnsitReader.LoadSample(@"g:\MNIST\train-images-idx3-ubyte.gz");
-            Console.WriteLine(data.Length);
-            var data2 = File.ReadAllBytes(@"G:\MNIST\Check\train-images.idx3-ubyte");
-            
-            if (data.Length != data2.Length)
-                throw new Exception("Size do not match");
-            for (int i=0;i<data.Length;i++)
-                if (data[i]!=data2[i])
-                    throw new Exception($"data do not match (i={i})");
-            Console.WriteLine("File is ok");
-        }
-
         static void TestMnist2()
         {
             var mnsitReaderTest = new MnistReader();
@@ -80,8 +65,8 @@ namespace TestNeuralNetwork
         {
             try
             {
-                TestMnist2(); return;
-                TestMnist();
+               // TestMnist2(); return;
+             
                 Test1();
                 TestCalibration();
             }

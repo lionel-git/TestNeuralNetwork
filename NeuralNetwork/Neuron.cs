@@ -37,22 +37,25 @@ namespace NeuralNetwork
 
         public Neuron(int size, bool randomize)
         {
-            Weights = new List<double>(size + 1);
-            WeightsDerivative = new List<double>(size + 1);
-            if (randomize)
+            if (size > 0) // Size = 0, means an input layer
             {
-                for (int i = 0; i <= size; i++)
+                Weights = new List<double>(size + 1);
+                WeightsDerivative = new List<double>(size + 1);
+                if (randomize)
                 {
-                    Weights.Add(GetRandomDouble());
-                    WeightsDerivative.Add(0.0);
+                    for (int i = 0; i <= size; i++)
+                    {
+                        Weights.Add(GetRandomDouble());
+                        WeightsDerivative.Add(0.0);
+                    }
                 }
-            }
-            else
-            {
-                for (int i = 0; i <= size; i++)
+                else
                 {
-                    Weights.Add(0.0);
-                    WeightsDerivative.Add(0.0);
+                    for (int i = 0; i <= size; i++)
+                    {
+                        Weights.Add(0.0);
+                        WeightsDerivative.Add(0.0);
+                    }
                 }
             }
         }
