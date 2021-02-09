@@ -58,10 +58,23 @@ namespace TestNeuralNetwork
             Console.WriteLine("File is ok");
         }
 
+        static void TestMnist2()
+        {
+            var mnsitReaderTest = new MnistReader();
+            mnsitReaderTest.LoadImagesAndLabels(@"g:\MNIST\t10k-images-idx3-ubyte.gz", @"g:\MNIST\t10k-labels-idx1-ubyte.gz");
+            Console.WriteLine($"Loaded: {mnsitReaderTest.ImagesLabels.Count}");
+
+            var mnsitReaderTrain = new MnistReader();
+            mnsitReaderTrain.LoadImagesAndLabels(@"g:\MNIST\train-images-idx3-ubyte.gz", @"g:\MNIST\train-labels-idx1-ubyte.gz");
+            Console.WriteLine($"Loaded: {mnsitReaderTrain.ImagesLabels.Count}");
+
+        }
+
         static void Main(string[] args)
         {
             try
             {
+                TestMnist2(); return;
                 TestMnist();
                 Test1();
                 TestCalibration();

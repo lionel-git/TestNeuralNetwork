@@ -11,3 +11,5 @@ Implementer descente gradient
 
 Loader MNIST
 http://yann.lecun.com/exdb/mnist/
+
+Display image + Label pour check
